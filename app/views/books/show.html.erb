@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @book.author %>
+</p>
+<p>
+	<strong>Image :</strong>
+	<%#= image_tag (@book.image)%>
+		<%# (@book.images).each do |image|%>
+			<%#= image_tag image %>
+	<%# end %>
+
+	<div>
+  <% if @book.images.attached? %>
+      <% @book.images.each do |image| %>
+      <%= image_tag image %>
+      <span>
+      <%= link_to '<-Remove', delete_image_attachment_book_url(image.signed_id),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      <i class="fas fa-trash"></i>
+      </span>
+    <% end %>
+  <% end %>
+</div>
+
+
+	<%# if @book.image.attached?%>
+
+  	<%#= image_tag (@book.image) if @book.image.present?%>
+  <%# end %>
+</p>
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>
+
+
+
